@@ -70,6 +70,7 @@ func proverbs(path string) ([][]byte, error) {
 // verbsHandle - обработчик входящего подключения. Раз в 3 секунды передает
 // клиенту случайную Go поговорку из списка verbs.
 func verbsHandle(conn net.Conn, verbs [][]byte) {
+	defer conn.Close()
 	for {
 		i := rand.Intn(len(verbs))
 		conn.Write(verbs[i])
